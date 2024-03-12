@@ -28,7 +28,7 @@
                     <td>An array of JSON objects holding data about all movies in the database</td>
                 </tr>
                 <tr>
-                    <td>Return data (title, description, genre, and director) about a single movie by title to the user</td>
+                    <td>Return data (title, description, genre, director, release, image, and if featured) about a single movie by title to the user</td>
                     <td>/movies/[title]</td>
                     <td>GET</td>
                     <td>None</td>
@@ -42,7 +42,7 @@
                     <td>A JSON object holding data about a genre</td>
                 </tr>
                 <tr>
-                    <td>Return data (name and birth) about a director by name</td>
+                    <td>Return data (name, birth, death, and bio) about a director by name</td>
                     <td>/movies/directors/[directorName]</td>
                     <td>GET</td>
                     <td>None</td>
@@ -54,33 +54,38 @@
                     <td>POST</td>
                     <td>A JSON object holding data about the user to add; Example: 
                         {
-                            "name" : "Lisa",
-                            "favoriteMovies" : "[]"
+                            "firstName":"John",
+                            "lastName":"Doe",
+                            "Birthday":"2000-01-01T00:00:00Z",
+                            "email":"johndoe@gmail.com",
+                            "Username":"johndoe123",
+                            "password":"password123",
+                            "favoriteMovies":[]
                         }
                     </td>
                     <td>A JSON object holding data about a user that has been added</td>
                 </tr>
                 <tr>
                     <td>Allow users to update their username</td>
-                    <td>/users/[id]</td>
+                    <td>/users/[Username]</td>
                     <td>PUT</td>
                     <td>A JSON object holding data about a user to update; Example:
                         {
-                            "name" : "updated name Joe"
+                            "Username" : "jdoe123"
                         }
                     </td>
                     <td>A JSON object holding data about the user that has been updated</td>
                 </tr>
                 <tr>
                     <td>Allow users to add a new movie title to their list of favorite movies</td>
-                    <td>/users/[id]/[movieTitle]</td>
+                    <td>/users/[Username]/movies/[MovieID]</td>
                     <td>PUT</td>
                     <td>None</td>
-                    <td>A text message indicating that a movie has been added the the user's array of favorite movies</td>
+                    <td>A JSON object of the updated user's information</td>
                 </tr>
                 <tr>
                     <td>Allow users to remove a movie title from their list of favorite movies</td>
-                    <td>/users/[id]/[movieTitle]</td>
+                    <td>/users/[Username]/movies/[MovieId]</td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>A text message indicating that a movie has been removed from the user's array of favorite movies</td>
