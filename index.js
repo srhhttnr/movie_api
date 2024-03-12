@@ -257,7 +257,7 @@ app.post('/users', async (req, res) => {
   });
 
 //UPDATE user information
-app.put('users/:Username', async (req, res) => {
+app.put('/users/:Username', async (req, res) => {
     await Users.findOneAndUpdate({ Username: req.params.Username }, {
         $set:
             {
@@ -279,7 +279,7 @@ app.put('users/:Username', async (req, res) => {
 });
 
 //UPDATE add new movie to user's list of favorite movies
-app.put('users/:Username/movies/:MovieID', async (req, res) => {
+app.post('/users/:Username/movies/:MovieID', async (req, res) => {
     await Users.findOneAndUpdate({ Username: req.params.Username }, {
         $push: { favoriteMovies: req.params.MovieID }
     },
