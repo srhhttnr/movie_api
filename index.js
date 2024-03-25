@@ -8,12 +8,19 @@ const express = require('express'),
 const Movies = Models.Movie;
 const Users = Models.User;
 
+//express and express validation
 const app = express();
+//validator library takes format : check([field in req.body to validate], [error message if validation fails]).[validation method]();
+const { check, validationResult } = require('express-validator');
 
 //body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+//cors
+const cors = require('cors');
+app.use(cors());
 
 //passport middleware
 let auth = require('./auth')(app);
@@ -232,7 +239,24 @@ app.use(morgan('common'));
 // ];
 
 //CREATE new user
-app.post('/users', async (req, res) => {
+app.post('/users', [
+    check('firstName', 'First Name is required').isLength({min: 1}),
+    check('firstName', 'First Name contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('LastName', 'Last Name is required').isLength({min: 1}),
+    check('LastName', 'Last Name contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('password', 'Password is required').not().isEmpty(),
+    check('email', 'Email does not appear to be valid').isEmail()
+  ], async (req, res) => {
+
+  // check the validation object for errors
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    let hashedPassword = Users.hashPassword(req.body.Password);
     await Users.findOne({ Username: req.body.Username })
       .then((user) => {
         if (user) {
@@ -259,7 +283,7 @@ app.post('/users', async (req, res) => {
         console.error(err);
         res.status(500).send('Error: ' + err);
       });
-  });
+});
 
 //UPDATE user information
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
