@@ -245,8 +245,8 @@ app.use(morgan('common'));
 app.post('/users', [
     check('firstName', 'First Name is required').isLength({min: 1}),
     check('firstName', 'First Name contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('LastName', 'Last Name is required').isLength({min: 1}),
-    check('LastName', 'Last Name contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('lastName', 'Last Name is required').isLength({min: 1}),
+    check('lastName', 'Last Name contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Username', 'Username is required').isLength({min: 5}),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('password', 'Password is required').not().isEmpty(),
