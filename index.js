@@ -27,8 +27,11 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-//mongoose
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose local
+//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+
+//mongoose online
+mongoose.connect( process.env.CONNECTION_URI , { useNewUrlParser: true, useUnifiedTopology: true });
 
 //morgan middleware
 app.use(morgan('common'));
