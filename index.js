@@ -247,10 +247,11 @@ app.post('/users', [
     check('firstName', 'First Name contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('lastName', 'Last Name is required').isLength({min: 1}),
     check('lastName', 'Last Name contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username is required').not().isEmpty(),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('password', 'Password is required').not().isEmpty(),
-    check('email', 'Email does not appear to be valid').isEmail()
+    check('email', 'Email does not appear to be valid').isEmail(),
+    check('email', 'Email is required').not().isEmpty()
   ], async (req, res) => {
 
   // check the validation object for errors
