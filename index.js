@@ -418,7 +418,7 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
 
 //welcome GET route
 app.get('/', (req, res) => {
-    res.send('Welcome to myFlix API!');
+    res.send('Welcome to myFlix!');
 });
 
 //express.static
