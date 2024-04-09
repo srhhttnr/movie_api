@@ -245,9 +245,9 @@ app.use(morgan('common'));
 app.post('/users', [
     check('Username', 'Username is required').not().isEmpty(),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('password', 'Password is required').not().isEmpty(),
-    check('email', 'Email does not appear to be valid').isEmail(),
-    check('email', 'Email is required').not().isEmpty()
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
+    check('Email', 'Email is required').not().isEmpty()
   ], async (req, res) => {
 
   // check the validation object for errors
