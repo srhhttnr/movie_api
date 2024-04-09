@@ -267,9 +267,9 @@ app.post('/users', [
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 Birthday: req.body.Birthday,
-                email: req.body.email,
+                Email: req.body.Email,
                 Username: req.body.Username,
-                password: req.body.password,
+                Password: req.body.Password,
                 favoriteMovies: req.body.favoriteMovies             
             })
             .then((user) => { res.status(201).json(user) })
@@ -297,9 +297,9 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 Birthday: req.body.Birthday,
-                email: req.body.email,
+                Email: req.body.Email,
                 Username: req.body.Username,
-                password: req.body.password,
+                Password: req.body.Password,
                 favoriteMovies: req.body.favoriteMovies
             }
     },
