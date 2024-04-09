@@ -20,8 +20,8 @@ let movieSchema = mongoose.Schema({
 });
 
 let userSchema = mongoose.Schema({
-    firstName: {type: String, required: true},
-    lastName: {type: String, required: true},
+    firstName: String,
+    lastName: String,
     Birthday: Date,
     email: {type: String, required: true},
     Username: {type: String, required: true},
