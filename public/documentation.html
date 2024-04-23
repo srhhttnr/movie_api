@@ -21,6 +21,16 @@
             </thead>
             <tbody>
                 <tr>
+                    <td>Allows the user to login to their account</td>
+                    <td>/login</td>
+                    <td>POST</td>
+                    <td>Query Params: Key and value pair for a username and password; Example:
+                        Username: [value]
+                        Password: [value]
+                    </td>
+                    <td>A JSON object holding data about the user, followed by a JSON Web Token</td>
+                </tr>
+                <tr>
                     <td>Return a list of all movies to the user</td>
                     <td>/movies</td>
                     <td>GET</td>
@@ -78,21 +88,21 @@
                 </tr>
                 <tr>
                     <td>Allow users to add a new movie title to their list of favorite movies</td>
-                    <td>/users/[Username]/movies/[MovieID]</td>
+                    <td>/users/[Username]/movies/[title]</td>
                     <td>POST</td>
                     <td>None</td>
                     <td>A JSON object of the updated user's information</td>
                 </tr>
                 <tr>
                     <td>Allow users to remove a movie title from their list of favorite movies</td>
-                    <td>/users/[Username]/movies/[MovieId]</td>
+                    <td>/users/[Username]/movies/[title]</td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>A text message indicating that a movie has been removed from the user's array of favorite movies</td>
                 </tr>
                 <tr>
                     <td>Allow existing users to deregister</td>
-                    <td>/users/[id]</td>
+                    <td>/users/[Username]</td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>A text message indicating that a user has been deleted</td>
