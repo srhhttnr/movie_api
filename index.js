@@ -300,7 +300,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
                 Email: req.body.Email,
                 Username: req.body.Username,
                 Password: req.body.Password,
-                //favoriteMovies: req.body.favoriteMovies
+                favoriteMovies: req.body.favoriteMovies
             }
     },
         { new: true }) 
