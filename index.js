@@ -1,9 +1,9 @@
-const express = require('express'),
-    morgan = require('morgan'),
-    bodyParser = require('body-parser'),
-    uuid = require('uuid'),
-    mongoose = require('mongoose'),
-    Models = require('./models.js');
+const express = require("express"),
+  morgan = require("morgan"),
+  bodyParser = require("body-parser"),
+  uuid = require("uuid"),
+  mongoose = require("mongoose"),
+  Models = require("./models.js");
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -11,7 +11,7 @@ const Users = Models.User;
 //express and express validation
 const app = express();
 //validator library takes format : check([field in req.body to validate], [error message if validation fails]).[validation method]();
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require("express-validator");
 
 //body parser middleware
 app.use(express.json());
@@ -19,22 +19,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //cors
-const cors = require('cors');
+const cors = require("cors");
 app.use(cors());
 
 //passport middleware
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
+let auth = require("./auth")(app);
+const passport = require("passport");
+require("./passport");
 
 //mongoose local
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 //mongoose online
-mongoose.connect( process.env.CONNECTION_URI , { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 //morgan middleware
-app.use(morgan('common'));
+app.use(morgan("common"));
 
 // //user data
 // //let users = [
@@ -68,7 +71,7 @@ app.use(morgan('common'));
 //         Release: 'February 6, 2009',
 //         Image: 'coraline.png',
 //         Featured: false
-//     }, 
+//     },
 //     {
 //         Title: 'Spirited Away',
 //         Description: 'The story follows Chihiro, a young girl who, after her parents are transformed into pigs, finds herself trapped in a mysterious and magical world. To save her family and escape, Chihiro must navigate a bathhouse for spirits, encountering strange creatures and overcoming various challenges.',
@@ -85,7 +88,7 @@ app.use(morgan('common'));
 //         Release: 'August 31, 2002',
 //         Image: 'spiritedaway.png',
 //         Featured: true
-//     }, 
+//     },
 //     {
 //         Title: 'Howl\'s Moving Castle',
 //         Description: 'The story follows a young woman named Sophie who is transformed into an elderly woman by a witch\'s curse. She encounters a magical, walking castle owned by the enigmatic wizard Howl. As Sophie becomes involved in Howl\'s world, she embarks on a journey filled with adventure, friendship, and self-discovery.',
@@ -119,7 +122,7 @@ app.use(morgan('common'));
 //         Release: 'March 31, 1999',
 //         Image: '10thingsihateaboutyou.png',
 //         Featured: false
-//     }, 
+//     },
 //     {
 //         Title: 'Clueless',
 //         Description: 'Set in Beverly Hills, the movie follows Cher Horowitz, a fashionable and popular high school student, as she navigates the ups and downs of teenage life and love. Cher takes her new friend Tai under her wing, attempting to give her a makeover while also dealing with her own romantic entanglements. As Cher tries to matchmake Tai with the object of her affection, she discovers more about herself and the complexities of relationships. The film is loosely based on Jane Austen\'s novel, \'Emma\'.',
@@ -136,7 +139,7 @@ app.use(morgan('common'));
 //         Release: 'July 19, 1995',
 //         Image: 'clueless.png',
 //         Featured: false
-//     }, 
+//     },
 //     {
 //         Title: 'Tommy Boy',
 //         Description: 'The story follows Tommy Callahan, a bumbling but good-hearted man who inherits his father\'s auto parts factory. To save the failing business, Tommy sets out on a cross-country sales trip with his father\'s sardonic former assistant, Richard. Along the way, they encounter various mishaps and comedic situations while learning about responsibility, friendship, and the value of hard work.',
@@ -153,7 +156,7 @@ app.use(morgan('common'));
 //         Release: 'March 31, 1995',
 //         Image: 'tommyboy.png',
 //         Featured: false
-//     }, 
+//     },
 //     {
 //         Title: 'The Hunger Games',
 //         Description: 'Based on Suzanne Collins\' novel of the same name, the film is set in a post-apocalyptic world and follows Katniss Everdeen, as she volunteers to take her sister\'s place in the annual Hunger Games, a televised event where children from twelve districts fight to the death until only one remains. Katniss must navigate the brutal arena, facing challenges, alliances, and betrayals, all while challenging the oppressive regime of the Capitol.',
@@ -170,7 +173,7 @@ app.use(morgan('common'));
 //         Release: 'March 23, 2012',
 //         Image: 'thehungergames.png',
 //         Featured: false
-//     }, 
+//     },
 //     {
 //         Title: 'Practical Magic',
 //         Description: 'Based on Alice Hoffman\'s novel of the same name, the story revolves around the Owens sisters, Sally and Gillian, who come from a long line of witches with a curse that dooms any man who falls in love with them to an untimely death. As they navigate their magical abilities and the complexities of love, they face challenges that test their bonds as sisters and the legacy of their family\'s supernatural history.',
@@ -187,7 +190,7 @@ app.use(morgan('common'));
 //         Release: 'October 16, 1998',
 //         Image: 'practicalmagic.png',
 //         Featured: false
-//     }, 
+//     },
 //     {
 //         Title: 'Ratatouille',
 //         Description: 'Set in Paris, the movie tells the story of Remy, a young rat with a refined palate and a passion for cooking. Against the wishes of his family, Remy aspires to become a chef and follows his dreams after finding himself in the kitchen of Gusteau\'s, a famous restaurant. With the help of Linguini, a garbage boy turned cook, Remy orchestrates culinary masterpieces while hiding his identity as a rat.',
@@ -204,7 +207,7 @@ app.use(morgan('common'));
 //         Release: 'June 29. 2007',
 //         Image: 'ratatouille.png',
 //         Featured: false
-//     }, 
+//     },
 //     {
 //         Title: 'Willy Wonka & the Chocolate Factory',
 //         Description: 'Based on Roald Dahl\'s novel, \'Charlie and the Chocolate Factory\', the story follows a young boy named Charlie Bucket who wins a golden ticket to tour the mysterious chocolate factory of the eccentric candy maker, Willy Wonka. Led by the charismatic chocolatier, the tour takes Charlie and other lucky children on a whimsical journey through fantastical rooms filled with chocolate rivers, vibrant edible landscapes, and absurd magical inventions. As the tour progresses, each child faces moral challenges that reveal their true character.',
@@ -221,7 +224,7 @@ app.use(morgan('common'));
 //         Release: 'June 30, 1971',
 //         Image: 'willywonkaandthechocolatefactory.png',
 //         Featured: false
-//     }, 
+//     },
 //     {
 //         Title: 'Twilight',
 //         Description: 'Based on the novel of the same name by Stephenie Meyer, the story revolves around Bella Swan, a teenage girl who moves to the small town of Forks, Washington, and becomes enamored with Edward Cullen, a mysterious and captivating vampire. As Bella and Edward\'s romance blossoms, they must navigate the complexities of their forbidden love amidst the dangers posed by other vampires and werewolves in their supernatural world.',
@@ -242,15 +245,20 @@ app.use(morgan('common'));
 // ];
 
 //CREATE new user
-app.post('/users', [
-    check('Username', 'Username is required').not().isEmpty(),
-    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
-    check('Email', 'Email does not appear to be valid').isEmail(),
-    check('Email', 'Email is required').not().isEmpty()
-  ], async (req, res) => {
-
-  // check the validation object for errors
+app.post(
+  "/users",
+  [
+    check("Username", "Username is required").not().isEmpty(),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - not allowed."
+    ).isAlphanumeric(),
+    check("Password", "Password is required").not().isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail(),
+    check("Email", "Email is required").not().isEmpty(),
+  ],
+  async (req, res) => {
+    // check the validation object for errors
     let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -260,174 +268,222 @@ app.post('/users', [
     await Users.findOne({ Username: req.body.Username })
       .then((user) => {
         if (user) {
-          return res.status(400).send(req.body.Username + ' already exists');
+          return res.status(400).send(req.body.Username + " already exists");
         } else {
-          Users
-            .create({
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                Birthday: req.body.Birthday,
-                Email: req.body.Email,
-                Username: req.body.Username,
-                Password: req.body.Password,
-                favoriteMovies: req.body.favoriteMovies             
+          Users.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            Birthday: req.body.Birthday,
+            Email: req.body.Email,
+            Username: req.body.Username,
+            Password: req.body.Password,
+            favoriteMovies: req.body.favoriteMovies,
+          })
+            .then((user) => {
+              res.status(201).json(user);
             })
-            .then((user) => { res.status(201).json(user) })
             .catch((error) => {
-                console.error(error);
-                res.status(500).send('Error: ' + error);
+              console.error(error);
+              res.status(500).send("Error: " + error);
             });
         }
       })
       .catch((err) => {
         console.error(err);
-        res.status(500).send('Error: ' + err);
+        res.status(500).send("Error: " + err);
       });
-});
+  }
+);
 
 //UPDATE user information
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.put(
+  "/users/:Username",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
     //check user
-    if(req.user.Username !== req.params.Username){
-        return res.status(400).send('Permission denied');
+    if (req.user.Username !== req.params.Username) {
+      return res.status(400).send("Permission denied");
     }
-    await Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $set:
-            {
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                Birthday: req.body.Birthday,
-                Email: req.body.Email,
-                Username: req.body.Username,
-                Password: req.body.Password,
-                favoriteMovies: req.body.favoriteMovies
-            }
-    },
-        { new: true }) 
-        .then((updatedUser) => { res.json(updatedUser); })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
-        })
-});
+    await Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $set: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          Birthday: req.body.Birthday,
+          Email: req.body.Email,
+          Username: req.body.Username,
+          Password: req.body.Password,
+          favoriteMovies: req.body.favoriteMovies,
+        },
+      },
+      { new: true }
+    )
+      .then((updatedUser) => {
+        res.json(updatedUser);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //UPDATE add new movie to user's list of favorite movies
-app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.post(
+  "/users/:Username/movies/:MovieID",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
     //check user
-    if(req.user.Username !== req.params.Username){
-        return res.status(400).send('Permission denied');
+    if (req.user.Username !== req.params.Username) {
+      return res.status(400).send("Permission denied");
     }
-    await Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $push: { favoriteMovies: req.params.MovieID }
-    },
-        { new: true })
-        .then((updatedUser) => { res.json(updatedUser); })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
-        });
-});
+    await Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $push: { favoriteMovies: req.params.MovieID },
+      },
+      { new: true }
+    )
+      .then((updatedUser) => {
+        res.json(updatedUser);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
-//DELETE movie from user's list of favorite movies 
-app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
+//DELETE movie from user's list of favorite movies
+app.delete(
+  "/users/:Username/movies/:MovieID",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
     //check user
-    if(req.user.Username !== req.params.Username){
-        return res.status(400).send('Permission denied');
+    if (req.user.Username !== req.params.Username) {
+      return res.status(400).send("Permission denied");
     }
-    await Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $pull: { favoriteMovies: req.params.MovieID }
-    },
-        { new: true })
-        .then((updatedUser) => { res.json(updatedUser); })
-        .catch((err) => {
-            res.status(500).send('Error: ' + err);
-        })
-});
+    await Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $pull: { favoriteMovies: req.params.MovieID },
+      },
+      { new: true }
+    )
+      .then((updatedUser) => {
+        res.json(updatedUser);
+      })
+      .catch((err) => {
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //DELETE user from registered users
-app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.delete(
+  "/users/:Username",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
     //check user
-    if(req.user.Username !== req.params.Username){
-        return res.status(400).send('Permission denied');
+    if (req.user.Username !== req.params.Username) {
+      return res.status(400).send("Permission denied");
     }
     await Users.findOneAndDelete({ Username: req.params.Username })
       .then((user) => {
         if (!user) {
-          res.status(400).send(req.params.Username + ' was not found');
+          res.status(400).send(req.params.Username + " was not found");
         } else {
-          res.status(200).send(req.params.Username + ' has been deleted');
+          res.status(200).send(req.params.Username + " has been deleted");
         }
       })
       .catch((err) => {
         console.error(err);
-        res.status(500).send('Error: ' + err);
+        res.status(500).send("Error: " + err);
       });
-  });
+  }
+);
 
 //READ return list of all movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Movies.find()
-      .then((movies) => {
-        res.status(201).json(movies);
+app.get("/movies", async (req, res) => {
+  await Movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+//READ return data about a single movie by title
+app.get(
+  "/movies/:Title",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    await Movies.findOne({ Title: req.params.Title })
+      .then((Movie) => {
+        if (!Movie) {
+          res.status(400).send(req.params.Title + " does not exist");
+        } else {
+          res.json(Movie);
+        }
       })
       .catch((err) => {
         console.error(err);
-        res.status(500).send('Error: ' + err);
+        res.status(500).send("Error: " + err);
       });
-  });
-
-//READ return data about a single movie by title
-app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Movies.findOne({ Title: req.params.Title })
-        .then((Movie) => {
-            if(!Movie) {
-                res.status(400).send(req.params.Title + ' does not exist');
-            } else {
-                res.json(Movie);
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
-        });
-});
+  }
+);
 
 //READ return data about genre
-app.get('/movies/genres/:genreName', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Movies.find({ "Genre.Name" : req.params.genreName })
-        .then((genre) => { res.json(genre); })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
-        });
-});
+app.get(
+  "/movies/genres/:genreName",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    await Movies.find({ "Genre.Name": req.params.genreName })
+      .then((genre) => {
+        res.json(genre);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //READ return data about a director by name
-app.get('/movies/directors/:directorName', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Movies.findOne({ "Director.Name" : req.params.directorName })
-        .then((director) => { res.json(director); })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
-        })
-});
+app.get(
+  "/movies/directors/:directorName",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    await Movies.findOne({ "Director.Name": req.params.directorName })
+      .then((director) => {
+        res.json(director);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //welcome GET route
-app.get('/', (req, res) => {
-    res.send('Welcome to myFlix!');
+app.get("/", (req, res) => {
+  res.send("Welcome to myFlix!");
 });
 
 //express.static
-app.use('/documentation', express.static('public'));
+app.use("/documentation", express.static("public"));
 
 //error handling middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Oops, something is broken.');
+  console.error(err.stack);
+  res.status(500).send("Oops, something is broken.");
 });
 
 //port
 const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0',() => {
-    console.log('Listening on Port ' + port);
+app.listen(port, "0.0.0.0", () => {
+  console.log("Listening on Port " + port);
 });
