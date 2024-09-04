@@ -20,7 +20,27 @@ app.use(bodyParser.json());
 
 //cors
 const cors = require("cors");
-app.use(cors());
+let allowedOrigins = [
+  "http://localhost8080",
+  "http://localhost1234",
+  "http://testsite.com",
+  "https://my-movies-db-cafa6b5db6b8.herokuapp.com",
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        let message =
+          "The CORS policy for this application doesn’t allow access from origin " +
+          origin;
+        return callback(new Error(message), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 
 //passport middleware
 let auth = require("./auth")(app);
@@ -72,7 +92,7 @@ app.post(
             Email: req.body.Email,
             Username: req.body.Username,
             Password: req.body.Password,
-            favoriteMovies: req.body.favoriteMovies,
+            FavoriteMovies: req.body.FavoriteMovies,
           })
             .then((user) => {
               res.status(201).json(user);
@@ -109,7 +129,7 @@ app.put(
           Email: req.body.Email,
           Username: req.body.Username,
           Password: req.body.Password,
-          favoriteMovies: req.body.favoriteMovies,
+          FavoriteMovies: req.body.FavoriteMovies,
         },
       },
       { new: true }
@@ -136,7 +156,7 @@ app.post(
     await Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
-        $push: { favoriteMovies: req.params.MovieID },
+        $push: { FavoriteMovies: req.params.MovieID },
       },
       { new: true }
     )
@@ -162,7 +182,7 @@ app.delete(
     await Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
-        $pull: { favoriteMovies: req.params.MovieID },
+        $pull: { FavoriteMovies: req.params.MovieID },
       },
       { new: true }
     )
