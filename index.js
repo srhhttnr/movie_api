@@ -25,6 +25,7 @@ let allowedOrigins = [
   "http://localhost1234",
   "http://testsite.com",
   "https://my-movies-db-cafa6b5db6b8.herokuapp.com",
+  "https://myflixmovies-project.netlify.app",
 ];
 
 app.use(
