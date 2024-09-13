@@ -21,8 +21,8 @@ app.use(bodyParser.json());
 //cors
 const cors = require("cors");
 let allowedOrigins = [
-  "http://localhost8080",
-  "http://localhost1234",
+  "http://localhost:8080",
+  "http://localhost:1234",
   "http://testsite.com",
   "https://my-movies-db-cafa6b5db6b8.herokuapp.com",
   "https://myflixmovies-project.netlify.app",
